@@ -1,0 +1,54 @@
+\documentclass{article}
+\title{Lab 01: Hybrid Encryption}
+\author{21120263 - Tong Nguyen Minh Khang}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{System Description}
+
+This report details the implementation of a simple hybrid encryption system for secure file exchange.
+
+\subsection{System Architecture}
+
+The system comprises two primary components: a client and a server. The client is responsible for encrypting data before transmission and decrypting data received from the server. Conversely, the server handles the decryption of incoming encrypted data and encrypts outgoing data for transmission to the client.
+
+\subsection{Security Mechanisms}
+
+To ensure secure communication, the system leverages a combination of cryptographic techniques:
+
+\subsubsection{Asymmetric Key Cryptography (RSA)}
+
+RSA is employed for key exchange, ensuring the secure transmission of symmetric keys between the client and server. The RSA key size used in this implementation is 2048 bits.
+
+\subsubsection{Symmetric Key Cryptography (AES)}
+
+AES is the primary encryption algorithm used for data confidentiality. The system utilizes a 256-bit AES key.
+
+\subsubsection{Hashing}
+
+SHA-256 hashing algorithm is used to generate message digests (hashes) for data integrity verification.
+
+\subsection{File Types Supported}
+
+The system currently supports the following file types: .txt, .pdf, .jpg, .png, .zip. 
+
+\subsection{Special Parameters}
+
+The system operates with the following parameters:
+
+\begin{itemize}
+    \item RSA Key Size: 2048 bits.
+    \item AES Key Size: 256 bits.
+    \item Hashing Algorithm: SHA-256.
+    \item Supported File Types: Every file that you have permission to read to.
+    \item 
+\end{itemize}
+
+\section{Conclusion}
+
+This report outlined the design and implementation of a secure communication system, emphasizing the use of robust cryptographic techniques for data confidentiality and integrity. 
+
+\end{document}
