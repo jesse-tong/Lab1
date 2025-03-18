@@ -1,4 +1,16 @@
 \documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\vspace*{1cm}
+
+   \textbf{University of Science - HCMUS}
+
+   \vspace{0.5cm}
+    CSC15106 – Knowledge Engineering Seminar
+
+\vspace{1.5cm}
+
 \title{Lab 01: Hybrid Encryption}
 \author{21120263 - Tong Nguyen Minh Khang}
 \date{\today}
@@ -7,48 +19,34 @@
 
 \maketitle
 
-\section{System Description}
+\section{Introduction}
+This report describes a simple hybrid encryption system for secure file exchange.
 
-This report details the implementation of a simple hybrid encryption system for secure file exchange.
-
-\subsection{System Architecture}
-
-The system comprises two primary components: a client and a server. The client is responsible for encrypting data before transmission and decrypting data received from the server. Conversely, the server handles the decryption of incoming encrypted data and encrypts outgoing data for transmission to the client.
-
-\subsection{Security Mechanisms}
-
-To ensure secure communication, the system leverages a combination of cryptographic techniques:
-
-\subsubsection{Asymmetric Key Cryptography (RSA)}
-
-RSA is employed for key exchange, ensuring the secure transmission of symmetric keys between the client and server. The RSA key size used in this implementation is 2048 bits.
-
-\subsubsection{Symmetric Key Cryptography (AES)}
-
-AES is the primary encryption algorithm used for data confidentiality. The system utilizes a 256-bit AES key.
-
-\subsubsection{Hashing}
-
-SHA-256 hashing algorithm is used to generate message digests (hashes) for data integrity verification.
-
-\subsection{File Types Supported}
-
-The system currently supports the following file types: .txt, .pdf, .jpg, .png, .zip. 
-
-\subsection{Special Parameters}
-
-The system operates with the following parameters:
+\section{System Overview}
+The system consists of the following main components:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagram.png}
+    \caption{This is a caption for the image.}
+    \label{fig:sample}
+\end{figure}
 
 \begin{itemize}
-    \item RSA Key Size: 2048 bits.
-    \item AES Key Size: 256 bits.
-    \item Hashing Algorithm: SHA-256.
-    \item Supported File Types: Every file that you have permission to read to.
-    \item 
+    \item \textbf{RSA Encryption:} Used to encrypt the symmetric AES key.
+    \item \textbf{AES Encryption:} Used for the encryption of the actual file data.
+    \item \textbf{Hashing using SHA-256:} Applied to ensure data integrity by checking the hash of the encrypted file against that of the decrypted file. 
+
+
+\section{Special Parameters}
+The following parameters are notable in the encryption settings:
+\begin{itemize}
+    \item \textbf{RSA Key Size:} A standard of 2048 bits is used for generating RSA key pairs, providing a good balance between security and performance.
+    \item \textbf{AES Key Size:} An AES block size of 16 bytes (128 bits) is utilized for encrypting the data.
+    \item \textbf{Hash Algorithm:} The SHA-256 hash function is employed to verify the integrity of the encrypted data.
+    \item \textbf{Supported File Types:} The system is designed to handle various binary files for encryption and decryption, with no explicit limitations on file types within the binary format.
 \end{itemize}
 
 \section{Conclusion}
-
-This report outlined the design and implementation of a secure communication system, emphasizing the use of robust cryptographic techniques for data confidentiality and integrity. 
+The hybrid encryption system effectively combines the benefits of RSA and AES to ensure secure communication, data confidentiality, and integrity.
 
 \end{document}
