@@ -4,22 +4,31 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 
+
 \begin{document}
 
 \begin{titlepage}
 \centering
+
+{\Large \textbf{University of Science - HCMUS}}
+
+\vspace{0.5cm}
+{\itshape\large CSC15106 – Knowledge Engineering Seminar}
+
+
+\vspace{2cm}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{hcmus.png}
+\end{figure}
+
+\vfill
+
 {\LARGE\bfseries Lab 01: Hybrid Encryption}
 
 \vspace{1cm}
 
 {\large 21120263 - Tong Nguyen Minh Khang}
-
-\vfill
-
-{\itshape University of Science - HCMUS}
-
-\vspace{0.5cm}
-{CSC15106 – Knowledge Engineering Seminar}
 
 \end{titlepage}
 
@@ -28,33 +37,33 @@ This report describes a simple hybrid encryption system for secure file exchange
 
 \section{Architecture}
 
-\begin{figure}[h]
+\begin{figure}[!h]
     \centering
     \includegraphics[width=0.95\textwidth]{diagram.png}
     \caption{Flow during encryption and decryption.}
     \label{fig:sample}
 \end{figure}
 
-\subsection*{Sender Side}
+\subsection{Sender Side}
 
 \begin{enumerate}
     \item \textbf{Compute SHA-256 Hash}: 
     The sender computes the SHA-256 hash of the plaintext message.
 
-    \item \textbf{Append Hash to Plaintext}:
-    The computed hash is appended to the plaintext, forming a combined message: \textit{Plaintext + Hash}.
-
     \item \textbf{Generate AES Key}:
-    An AES key is generated for encrypting the plaintext.
+    An AES key is generated to encrypt the plaintext.
 
-    \item \textbf{Encrypt Plaintext and Hash}:
-    The combined \textit{Plaintext + Hash} is encrypted using the AES key, resulting in the ciphertext.
+    \item \textbf{Encrypt Plaintext}:
+    The combined \textit{Plaintext} is encrypted using the AES key, resulting in the ciphertext.
+
+    \item \textbf{Append Hash to Ciphertext}:
+    The computed hash is attached to ciphertext, forming a combined message: \textit{Ciphertext + Hash}.
 
     \item \textbf{Encrypt AES Key}:
     The AES key is encrypted using RSA encryption to ensure secure key exchange.
 
     \item \textbf{Send to Receiver}:
-    The sender transmits the encrypted AES key and the ciphertext to the receiver.
+    The sender transmits the encrypted AES key and ciphertext to the receiver.
 \end{enumerate}
 
 \subsection*{Receiver Side}
@@ -63,11 +72,14 @@ This report describes a simple hybrid encryption system for secure file exchange
     \item \textbf{Receive Data}:
     The receiver obtains the encrypted AES key and the ciphertext.
 
+    \item \textbf{Get Hash and Ciphertext}
+    The first bytes (since I used SHA256, the hash value has 32 bytes) of the received data are the hash value, while the rest is the ciphertext.
+    
     \item \textbf{Decrypt AES Key}:
     The receiver uses RSA decryption to recover the AES key.
 
     \item \textbf{Decrypt Ciphertext}:
-    The ciphertext is decrypted using the recovered AES key, resulting in the original \textit{Plaintext + Hash}.
+    The ciphertext is decrypted using the recovered AES key, resulting in the original \textit{Plaintext}.
 
     \item \textbf{Compute SHA-256 Hash}:
     The receiver extracts the plaintext and computes its SHA-256 hash.
@@ -76,13 +88,13 @@ This report describes a simple hybrid encryption system for secure file exchange
     The receiver compares the computed hash with the hash received along with the plaintext.
 
     \item \textbf{Verify Integrity}:
-    If the computed hash matches the received hash, data integrity is verified, and the process concludes successfully.
+    If the computed hash matches the received hash, the integrity of the data is verified and the process is completed successfully.
     If the hashes do not match, the data is identified as corrupted.
 \end{enumerate}
 
 \subsection*{Final Result}
 
-- If the hashes match, the process confirms that the data has not been tampered with, and the integrity is verified. \\
+- If the hashes match, the process confirms that the data have not been tampered with, and the integrity is verified. \\
 - If the hashes do not match, it indicates data corruption during transmission. \\
 
 \section{System Overview}
@@ -104,7 +116,7 @@ The following parameters are used in the program:
 \end{itemize}
 
 \section{References}
-\href{PyCryptodome documentation}{https://pycryptodome.readthedocs.io/en/latest/index.html} \\
-\href{ArgParse documentation}{https://docs.python.org/3/library/argparse.html}
+\href{https://pycryptodome.readthedocs.io/en/latest/index.html}{PyCryptodome documentation} \\
+\href{https://docs.python.org/3/library/argparse.html}{ArgParse documentation}
 
 \end{document}
