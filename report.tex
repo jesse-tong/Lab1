@@ -30,7 +30,7 @@ This report describes a simple hybrid encryption system for secure file exchange
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{diagram.png}
+    \includegraphics[width=0.95\textwidth]{diagram.png}
     \caption{Flow during encryption and decryption.}
     \label{fig:sample}
 \end{figure}
@@ -92,7 +92,7 @@ The system consists of the following main components:
     \item \textbf{RSA Encryption:} Used to encrypt the symmetric AES key.
     \item \textbf{AES Encryption:} Used for the encryption of the actual file data.
     \item \textbf{Hashing using SHA-256:} Applied to ensure data integrity by checking the hash of the encrypted file against that of the decrypted file. 
-
+\end{itemize}
 
 \section{Special Parameters}
 The following parameters are used in the program:
@@ -103,7 +103,7 @@ The following parameters are used in the program:
     \item \textbf{Supported File Types:} The system is designed to handle various binary files for encryption and decryption, with no explicit limitations on file types within the binary format, as long as you have permissions to read the input file (key and unencrypted file), and writing the output files (encrypted file, decrypted file, encrypted key, public and private keys) to the directory you specified.
 \end{itemize}
 
-\section{Conclusion}
+\section{References}
 
 
 \end{document}
